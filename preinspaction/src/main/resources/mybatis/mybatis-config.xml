@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="PreinspactionDTO" type="com.wit.inspaction.preinspaction.model.PreinspactionDTO"/>
+        <typeAlias alias="PreinspactionDetailDTO" type="com.wit.inspaction.preinspaction.model.PreinspactionDetailDTO"/>
+        <typeAlias alias="UserDTO" type="com.wit.inspaction.user.model.UserDTO"/>
+    </typeAliases>
+    
+</configuration>

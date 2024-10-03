@@ -1,0 +1,13 @@
+com\wit\inspaction\user\service\UserServiceImpl.class
+com\wit\inspaction\preinspaction\service\PreinspactionServiceImpl.class
+com\wit\inspaction\PreinspactionApplication.class
+com\wit\inspaction\preinspaction\service\PreinspactionService.class
+com\wit\inspaction\preinspaction\mapper\PreinspactionMapper.class
+com\wit\inspaction\preinspaction\model\PreinspactionDetailDTO.class
+com\wit\inspaction\user\mapper\UserMapper.class
+com\wit\inspaction\preinspaction\PreinspactionController.class
+com\wit\inspaction\user\model\UserDTO.class
+com\wit\inspaction\preinspaction\model\PreinspactionDTO.class
+com\wit\inspaction\user\service\UserService.class
+com\wit\inspaction\user\UserController.class
+com\wit\inspaction\UserApplication.class

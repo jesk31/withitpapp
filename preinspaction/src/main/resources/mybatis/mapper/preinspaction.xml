@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.wit.inspaction.preinspaction.mapper.PreinspactionMapper">
+
+	<!-- 사전점검 항목 리스트 조회 -->
+	<select id="selectPreinspactionList" resultType="PreinspactionDTO">
+		SELECT
+			  A.INSP_ID AS inspId
+		    , A.INSP_SEQ AS inspSeq
+		    , A.INSP_NM AS inspNm
+		    , (SELECT COUNT(S.INSP_DETL_CD) FROM WIT.WIT_INSP200T S
+				WHERE S.INSP_ID = A.INSP_ID
+		        AND S.END_DATE = '99991231235959') AS inspDetlAllCnt
+		    , (SELECT COUNT(S.INSP_ID) FROM WIT.WIT_INSP300T S
+		    	WHERE S.INSP_ID = A.INSP_ID
+		    	AND CHECK_YN = 'Y') AS inspDetlChoiceCnt
+		FROM 
+			  WIT.WIT_INSP100T A
+		WHERE A.END_DATE = '99991231235959'
+	</select>
+	
+	<!-- 사전점검 상세항목 리스트 조회 -->
+	<select id="selectPreinspactionDetailList" parameterType="java.util.HashMap" resultType="PreinspactionDetailDTO">
+		SELECT
+			  A.INSP_ID AS inspId
+			, A.INSP_DETL_CD AS inspDetlId
+		    , A.INSP_DETL_NM AS inspDetlNm
+		    , IFNULL((SELECT CHECK_YN FROM WIT.WIT_INSP300T S
+		    	WHERE S.INSP_ID = A.INSP_ID
+		    	AND S.INSP_DETL_CD = A.INSP_DETL_CD), 'N') AS checkYn
+		FROM 
+			  WIT.WIT_INSP200T A
+		WHERE A.INSP_ID = #{inspId}
+		AND A.END_DATE = '99991231235959'
+	</select>
+	
+	<!-- 사전점검 항목 저장 -->
+	<insert id="insertPreinspactionInfo" parameterType="java.util.HashMap">
+		INSERT INTO WIT.WIT_INSP300T(
+			 INSP_ID
+			, INSP_DETL_CD
+			, CHECK_YN
+		) VALUES (
+			 #{inspId}
+			, #{inspDetlId}
+			, #{checkYn}
+		)
+		ON DUPLICATE KEY UPDATE
+			CHECK_YN = VALUES(CHECK_YN)
+	</insert>
+
+</mapper>
